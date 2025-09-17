@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Media Converter - Convenience Script
+# A simple wrapper around the Python media converter tool
+
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PYTHON_SCRIPT="$SCRIPT_DIR/media_converter.py"
+
+# Check if Python script exists
+if [ ! -f "$PYTHON_SCRIPT" ]; then
+    echo "Error: media_converter.py not found in $SCRIPT_DIR"
+    exit 1
+fi
+
+# Check if Python 3 is available
+if command -v python3 &> /dev/null; then
+    PYTHON_CMD="python3"
+elif command -v python &> /dev/null; then
+    PYTHON_CMD="python"
+else
+    echo "Error: Python not found. Please install Python 3.7 or higher."
+    exit 1
+fi
+
+# Show usage if no arguments
+if [ $# -eq 0 ]; then
+    echo "Media Converter - Quick Usage"
+    echo "============================="
+    echo ""
+    echo "Image Operations:"
+    echo "  $0 img file.jpg --format webp --quality 80"
+    echo "  $0 img *.jpg --compress --quality 75"
+    echo "  $0 img photo.png --resize 1920x1080"
+    echo ""
+    echo "Video Operations (requires FFmpeg):"
+    echo "  $0 vid video.mp4 --quality medium --compress"
+    echo "  $0 vid input.avi --format mp4 --resolution 1280x720"
+    echo ""
+    echo "For detailed help:"
+    echo "  $0 --help"
+    echo "  $0 image --help"
+    echo "  $0 video --help"
+    echo ""
+    exit 0
+fi
+
+# Handle shortcuts
+case "$1" in
+    "img"|"image"|"i")
+        shift
+        exec "$PYTHON_CMD" "$PYTHON_SCRIPT" image "$@"
+        ;;
+    "vid"|"video"|"v")
+        shift
+        exec "$PYTHON_CMD" "$PYTHON_SCRIPT" video "$@"
+        ;;
+    *)
+        # Pass through all other arguments
+        exec "$PYTHON_CMD" "$PYTHON_SCRIPT" "$@"
+        ;;
+esac

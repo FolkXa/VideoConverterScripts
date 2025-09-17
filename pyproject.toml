@@ -1,0 +1,14 @@
+[project]
+name = "scripts"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "argparse>=1.4.0",
+    "pillow>=10.0.0",
+    "pillow-avif-plugin>=1.4.0",
+    "pillow-heif>=0.10.0",
+    "python-magic>=0.4.27",
+    "tqdm>=4.65.0",
+]

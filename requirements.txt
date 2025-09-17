@@ -1,0 +1,27 @@
+# Media Converter Dependencies
+# Core image processing library
+Pillow>=10.0.0
+
+# Optional dependencies for enhanced functionality
+# For better JPEG optimization
+pillow-heif>=0.10.0
+
+# For additional image format support
+pillow-avif-plugin>=1.4.0
+
+# For progress bars in CLI (optional)
+tqdm>=4.65.0
+
+# For better command line argument parsing and help formatting
+argparse>=1.4.0
+
+# For file type detection (optional enhancement)
+python-magic>=0.4.27
+
+# For EXIF data handling (already included in Pillow, but explicit for clarity)
+# exifread>=3.0.0  # Optional, Pillow handles most EXIF needs
+
+# Development dependencies (optional)
+# pytest>=7.0.0
+# black>=23.0.0
+# flake8>=6.0.0
